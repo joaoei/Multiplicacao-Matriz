@@ -14,28 +14,26 @@ int main( int argc, char * argv[] ) {
 		    vector<vector<int>> matrizB (tam, vector<int>(tam));
 		    vector<vector<int>> matrizC (tam, vector<int>(tam));
 
-  			if (!abre_arq("A", tam, matrizA)) return 0; 
-  			if (!abre_arq("B", tam, matrizB)) return 0; 
-  			/*
-  			for (int i = 0; i < tam; ++i)
-  			{
-  				for (int j = 0; j < tam; ++j)
-  				{
-  					cout << matrizA[i][j] << " ";
-  				}
-  				cout << endl;
+  			if (!abre_arq("A", tam, matrizA) || !abre_arq("B", tam, matrizB)) {
+  				cout << "Erro ao abrir arquivos" << endl;
+  				return 0;
   			}
-  			cout << endl;
-  			for (int i = 0; i < tam; ++i)
-  			{
-  				for (int j = 0; j < tam; ++j)
-  				{
-  					cout << matrizB[i][j] << " ";
-  				}
-  				cout << endl;
+  			
+  			if (prog == "S") {
+  				//Programa sequencial
+  				//mult_matriz_seq(matrizA, matrizB, matrizC, tam);
+  				if (!escreve_arq(tam, matrizC)) {
+  					cout << "Erro ao escrever arquivos" << endl;
+  					return 0;
+  				} 
+  			} else {
+  				//Programa concorrente
+  				//mult_matriz_conc(matrizA, matrizB, matrizC, tam);
+  				if (!escreve_arq(tam, matrizC)) {
+  					cout << "Erro ao escrever arquivos" << endl;
+  					return 0;
+  				} 
   			}
-  			*/
-			//Programa...
 		} else {
 			cout << tam << " não é um valor válido, tente inserir um número que é maior que 2 e potência de base 2" << endl;
 			cout << "Ou" << endl;

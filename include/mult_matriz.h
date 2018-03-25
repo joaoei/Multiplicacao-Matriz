@@ -35,6 +35,29 @@ bool abre_arq(string letra, int tam, vector<vector<int>> &matriz) {
 	return true;
 }
 
+bool escreve_arq(int tam, vector<vector<int>> matriz) {
+	string nomeArq = "matrizes/C"+to_string(tam)+"x"+to_string(tam)+".txt";
+	ofstream arq (nomeArq);
+	if (!arq.is_open()) {
+  		cout << "Não foi possível abrir o arquivo" << endl;
+  		return false;
+  	}
+  	string l = ""; 
+	arq << to_string(tam)+" "+to_string(tam)+"\n";
+	for (int i = 0; i < tam; ++i)
+	{
+		for (int j = 0; j < tam; ++j)
+		{
+			l += to_string(matriz[i][j])+" ";
+		} 
+		arq << l;
+		arq << "\n";
+		l = "";
+	}
+	arq.close();
+	return true;
+}
+
 bool num_pot2(double num) {
 	if (num <= 1) {
 		if (num == 1) { return true;}
