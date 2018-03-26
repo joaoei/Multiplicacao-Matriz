@@ -1,6 +1,9 @@
 #include "mult_matriz.h"
 #include <stdio.h>
 #include <iostream>
+#include <cstdlib>
+
+#define NUM_THREADS 5
 
 int main( int argc, char * argv[] ) {
 	if ( argc > 2 ) { 
@@ -16,23 +19,46 @@ int main( int argc, char * argv[] ) {
 
   			if (!abre_arq("A", tam, matrizA) || !abre_arq("B", tam, matrizB)) {
   				cout << "Erro ao abrir arquivos" << endl;
-  				return 0;
+  				exit(-1);
   			}
   			
   			if (prog == "S") {
-  				//Programa sequencial
   				//mult_matriz_seq(matrizA, matrizB, matrizC, tam);
   				if (!escreve_arq(tam, matrizC)) {
   					cout << "Erro ao escrever arquivos" << endl;
-  					return 0;
+  					exit(-1);
   				} 
   			} else {
-  				//Programa concorrente
-  				//mult_matriz_conc(matrizA, matrizB, matrizC, tam);
+  				pthread_t threads[tam];
+  				struct estrutura est[tam];
+				int resultado;
+				void *status;
+				   
+				for(int i = 0; i < tam; i++ ) {
+					est[i].tam = tam;
+				   	est[i].linha = i;
+				   	est[i].matrizA = matrizA[i];
+				   	est[i].matrizB = matrizB;
+				   	est[i].matrizC = (void *) &matrizC[0];
+				    resultado = pthread_create(&threads[i], NULL, mult_linha_conc, (void *)&est[i]);
+				      
+				    if (resultado) {
+				        cout << "Erro: não foi possivel criar a thread," << resultado << endl;
+				        exit(-1);
+				    }
+				}
+				for(int i = 0; i < tam; i++ ) {
+				    resultado = pthread_join(threads[i], &status);
+				    if (resultado) {
+				        cout << "Erro: incapaz de fazer join na thread," << resultado << endl;
+				        exit(-1);
+				    }
+				}
+
   				if (!escreve_arq(tam, matrizC)) {
   					cout << "Erro ao escrever arquivos" << endl;
-  					return 0;
-  				} 
+  					exit(-1);
+  				}
   			}
 		} else {
 			cout << tam << " não é um valor válido, tente inserir um número que é maior que 2 e potência de base 2" << endl;

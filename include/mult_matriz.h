@@ -3,13 +3,41 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <thread>
+#include <pthread.h>
 
-void mult_matriz_seq(vector<vector<int>> matrizA, vector<vector<int>> matrizB, vector<vector<int>> &matrizC, int tam) {
-	//Programa...
+/*
+void mult_linha_conc(vector<int> matrizA, vector<vector<int>> matrizB, vector<vector<int>> &matrizC, int tam, int linha) {
+	for (int i = 0; i < tam; i++) {
+		int var = 0;
+		for (int j = 0; j < tam; j++) {
+			var += matrizA[j]*matrizB[j][i];
+		}
+		matrizC[linha][i] = var;
+	}
 }
+*/
+struct estrutura {
+	int tam;
+	int linha;
+	vector<int> matrizA;
+	vector<vector<int>> matrizB;
+	void *matrizC;
+};
 
-void mult_matriz_conc(vector<vector<int>> matrizA, vector<vector<int>> matrizB, vector<vector<int>> &matrizC, int tam) {
-	//Programa...	
+void *mult_linha_conc(void *t) {
+	struct estrutura *dados;
+	dados = (struct estrutura *) t;
+	vector<int> *linhaMatrizC;
+    linhaMatrizC = (vector<int> *) dados->matrizC;
+
+    for (int i = 0; i < dados->tam; i++) {
+		int var = 0;
+		for (int j = 0; j < dados->tam; j++) {
+			var += dados->matrizA[j]*dados->matrizB[j][i];
+		}
+		linhaMatrizC[dados->linha][i] = var;
+	}
 }
 
 bool abre_arq(string letra, int tam, vector<vector<int>> &matriz) {
@@ -65,3 +93,18 @@ bool num_pot2(double num) {
 	}
 	return num_pot2(num/2);
 }
+
+void mult_matriz_seq(vector<vector<int>> matrizA, vector<vector<int>> matrizB, vector<vector<int>> &matrizC, int tam) {
+	//Programa...
+}
+/*
+void mult_matriz_conc(vector<vector<int>> matrizA, vector<vector<int>> matrizB, vector<vector<int>> &matrizC, int tam) {
+	vector<thread> threads;
+ 	for (int i = 0; i < tam; i++) {
+ 		threads.push_back(thread(calc_linha, matrizA[i], matrizB, tam, i));
+ 	}
+ 	for (int j = 0; j < tam; j++) {
+ 		threads[j].join(); 
+ 	}
+}
+*/
