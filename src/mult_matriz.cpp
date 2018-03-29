@@ -3,7 +3,14 @@
 #include <iostream>
 #include <cstdlib>
 
-#define NUM_THREADS 5
+/*
+* FALTA FAZER: 
+*	- Algoritmo sequencial da multiplicação de matrizes
+*	- Executar cada algoritmo para cada tamanho diferente 20 vezes e salvar os tempos.
+	  Calcular o tempo maximo, minimo e media, além do desvio padrão
+	  Calcular speedup (T_sequencial/T_concorrente)
+	- Escrever relatório: Introdução, Metodolgia, Resultados e Conclusões. 
+*/
 
 int main( int argc, char * argv[] ) {
 	if ( argc > 2 ) { 
@@ -47,6 +54,7 @@ int main( int argc, char * argv[] ) {
 				        exit(-1);
 				    }
 				}
+
 				for(int i = 0; i < tam; i++ ) {
 				    resultado = pthread_join(threads[i], &status);
 				    if (resultado) {
@@ -54,6 +62,7 @@ int main( int argc, char * argv[] ) {
 				        exit(-1);
 				    }
 				}
+				pthread_exit(NULL);
 
   				if (!escreve_arq(tam, matrizC)) {
   					cout << "Erro ao escrever arquivos" << endl;
