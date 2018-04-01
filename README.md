@@ -8,4 +8,4 @@ Trabalho prático da matéria de Programação Concorrente, onde é necessário 
 
 `./multimat [tamanho_matriz] [tipo_multiplicação]`
 
-`tamanho_matriz` deve ser um inteiro positivo maior que 4 (possuindo matriz com esse tamanho) e `tipo_multiplicação` deve ser S (sequencial) ou C (concorrente).
+`[tamanho_matriz]` deve ser um inteiro positivo maior que 4 (possuindo matriz com esse tamanho) e `[tipo_multiplicação]` deve ser S (sequencial) ou C (concorrente).
