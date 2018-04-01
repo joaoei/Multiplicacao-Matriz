@@ -1,7 +1,4 @@
 #include "mult_matriz.h"
-#include <stdio.h>
-#include <iostream>
-#include <cstdlib>
 
 /*
 * FALTA FAZER:
