@@ -4,8 +4,7 @@
 #include <cstdlib>
 
 /*
-* FALTA FAZER: 
-*	- Algoritmo sequencial da multiplicação de matrizes
+* FALTA FAZER:
 *	- Executar cada algoritmo para cada tamanho diferente 20 vezes e salvar os tempos.
 	  Calcular o tempo maximo, minimo e media, além do desvio padrão
 	  Calcular speedup (T_sequencial/T_concorrente)
