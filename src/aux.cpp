@@ -44,6 +44,7 @@ bool abre_arq(string letra, int tam, vector<vector<int>> &matriz) {
 bool escreve_arq(int tam, vector<vector<int>> matriz) {
 	string nomeArq = "matrizes/C"+to_string(tam)+"x"+to_string(tam)+".txt";
 	ofstream arq (nomeArq);
+	
 	if (!arq.is_open()) {
   		cout << "Não foi possível abrir o arquivo" << endl;
   		return false;
