@@ -2,9 +2,7 @@
 
 /*
 * FALTA FAZER:
-*	- Executar cada algoritmo para cada tamanho diferente 20 vezes e salvar os tempos.
-	  Calcular o tempo maximo, minimo e media, além do desvio padrão
-	  Calcular speedup (T_sequencial/T_concorrente)
+*	- Calcular speedup (T_sequencial/T_concorrente)
 	- Escrever relatório: Introdução, Metodolgia, Resultados e Conclusões. 
 */
 
@@ -40,6 +38,7 @@ int main( int argc, char * argv[] ) {
 					
 					// Salvando valores
 					valores[j] = tempo_decorrido.count();
+					escreve_resultado(tam, valores, "S");
 					cout << j << ". Tempo: " << valores[j] << endl;
   				}
 
@@ -85,15 +84,17 @@ int main( int argc, char * argv[] ) {
 					
 					// Salvando valores
 					valores[j] = tempo_decorrido.count();
+					escreve_resultado(tam, valores, "C");
 					cout << j << ". Tempo: " << valores[j] << endl;
 				}
-
 				pthread_exit(NULL);
   				
   				if (!escreve_arq(tam, matrizC)) {
   					cout << "Erro ao escrever arquivos" << endl;
   					exit(-1);
   				}
+
+
   			}
 		} else {
 			cout << tam << " não é um valor válido, tente inserir um número que é maior que 2 e potência de base 2" << endl;

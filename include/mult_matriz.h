@@ -9,7 +9,9 @@ using namespace std;
 #include <thread>
 #include <pthread.h>
 #include <cstdlib>
+
 #include <chrono>
+#include <algorithm>
 
 struct estrutura {
 	int tam;
@@ -24,6 +26,8 @@ void *mult_linha_conc(void *);
 bool abre_arq(string, int, vector<vector<int>> &);
 
 bool escreve_arq(int, vector<vector<int>>);
+
+bool escreve_resultado(int, vector<double>, string);
 
 bool num_pot2(double);
 

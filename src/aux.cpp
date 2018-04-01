@@ -1,5 +1,7 @@
 #include "mult_matriz.h"
 
+#include<math.h>
+
 void *mult_linha_conc(void *t) {
 	struct estrutura *dados;
 	dados = (struct estrutura *) t;
@@ -58,6 +60,49 @@ bool escreve_arq(int tam, vector<vector<int>> matriz) {
 		arq << "\n";
 		l = "";
 	}
+	arq.close();
+	return true;
+}
+
+bool escreve_resultado(int tam, vector<double> valores, string tipo) {
+	double soma = 0; // Variável usada para calcular a média depois
+	double media;
+
+	string nomeArq = "resultados/C"+to_string(tam)+"x"+to_string(tam)+"_"+tipo+".txt";
+	ofstream arq (nomeArq);
+
+	if (!arq.is_open()) {
+  		cout << "Não foi possível abrir o arquivo" << endl;
+  		return false;
+  	}
+
+	for (unsigned int i = 0; i < valores.size(); ++i)
+	{
+		soma += valores[i];
+		arq << i << ". Tempo: " + to_string(valores[i]) + "\n";
+	}
+
+	media = soma/valores.size();
+
+	double desvio_padrao;
+	double variancia;
+
+	for(unsigned int i = 0; i < valores.size(); ++i) {
+		variancia += pow((valores[i] - media), 2);
+	}
+
+	variancia /= valores.size();
+
+	desvio_padrao = sqrt(variancia);
+
+
+  	auto resultado = minmax_element(valores.begin(), valores.end());
+
+  	arq << "Menor valor: " + to_string(valores[resultado.first - valores.begin()]) + " na posição " + to_string(resultado.first - valores.begin()) + "\n";
+  	arq << "Maior valor: " + to_string(valores[resultado.second - valores.begin()]) + " na posição " + to_string(resultado.second - valores.begin()) + "\n";
+  	arq << "Média: " + to_string(media) + "\n";
+  	arq << "Desvio padrão: " + to_string(desvio_padrao) + "\n";
+
 	arq.close();
 	return true;
 }
