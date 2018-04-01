@@ -30,7 +30,7 @@ int main( int argc, char * argv[] ) {
   			}
   			
   			if (prog == "S") {
-  				//mult_matriz_seq(matrizA, matrizB, matrizC, tam);
+  				mult_matriz_seq(matrizA, matrizB, matrizC, tam);
   				if (!escreve_arq(tam, matrizC)) {
   					cout << "Erro ao escrever arquivos" << endl;
   					exit(-1);

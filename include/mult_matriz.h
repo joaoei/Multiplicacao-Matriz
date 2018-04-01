@@ -85,5 +85,14 @@ bool num_pot2(double num) {
 }
 
 void mult_matriz_seq(vector<vector<int>> matrizA, vector<vector<int>> matrizB, vector<vector<int>> &matrizC, int tam) {
-	//Programa...
+	for (int i = 0; i < tam; ++i){
+		for (int j = 0; j < tam; ++j){
+			int soma = 0;
+			for (int k = 0; k < tam; ++k)
+			{
+				soma += matrizA[i][k] * matrizB[k][j];
+			}
+			matrizC[i][j] = soma;
+		}
+	}
 }
