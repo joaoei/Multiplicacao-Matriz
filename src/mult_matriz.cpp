@@ -1,9 +1,5 @@
 #include "mult_matriz.h"
 
-#include <chrono>
-
-using namespace std::chrono;
-
 /*
 * FALTA FAZER:
 *	- Executar cada algoritmo para cada tamanho diferente 20 vezes e salvar os tempos.

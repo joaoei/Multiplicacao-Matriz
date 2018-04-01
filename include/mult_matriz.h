@@ -9,6 +9,7 @@ using namespace std;
 #include <thread>
 #include <pthread.h>
 #include <cstdlib>
+#include <chrono>
 
 struct estrutura {
 	int tam;
