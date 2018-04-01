@@ -85,7 +85,7 @@ bool escreve_resultado(int tam, vector<double> valores, string tipo) {
 	media = soma/valores.size();
 
 	double desvio_padrao;
-	double variancia;
+	double variancia = 0;
 
 	for(unsigned int i = 0; i < valores.size(); ++i) {
 		variancia += pow((valores[i] - media), 2);
