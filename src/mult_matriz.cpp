@@ -82,12 +82,13 @@ int main( int argc, char * argv[] ) {
 					std::chrono::duration<double> tempo_decorrido = fim-inicio;
 					cout << "Tempo: " << tempo_decorrido.count() << endl;
 				}
+
+				pthread_exit(NULL);
   				
   				if (!escreve_arq(tam, matrizC)) {
   					cout << "Erro ao escrever arquivos" << endl;
   					exit(-1);
   				}				
-  			
 		} else {
 			cout << tam << " não é um valor válido, tente inserir um número que é maior que 2 e potência de base 2" << endl;
 			cout << "Ou" << endl;
