@@ -47,7 +47,6 @@ int main( int argc, char * argv[] ) {
   					exit(-1);
   				} 
   			} else {
-  				for(int j = 0; j < 20; ++j) {
 	  				// Iniciando contagem
 		  			auto inicio = std::chrono::system_clock::now();
 	  				
@@ -81,19 +80,14 @@ int main( int argc, char * argv[] ) {
 					// Finalizando contagem
 					auto fim = std::chrono::system_clock::now();
 					std::chrono::duration<double> tempo_decorrido = fim-inicio;
-					
-					// Salvando valores
-					valores[j] = tempo_decorrido.count();
-					escreve_resultado(tam, valores, "C");
-					cout << j << ". Tempo: " << valores[j] << endl;
+					cout << "Tempo: " << tempo_decorrido.count() << endl;
 				}
   				
   				if (!escreve_arq(tam, matrizC)) {
   					cout << "Erro ao escrever arquivos" << endl;
   					exit(-1);
   				}				
-				pthread_exit(NULL);
-  			}
+  			
 		} else {
 			cout << tam << " não é um valor válido, tente inserir um número que é maior que 2 e potência de base 2" << endl;
 			cout << "Ou" << endl;
