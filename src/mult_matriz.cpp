@@ -87,12 +87,13 @@ int main( int argc, char * argv[] ) {
 					escreve_resultado(tam, valores, "C");
 					cout << j << ". Tempo: " << valores[j] << endl;
 				}
+
+				pthread_exit(NULL);
   				
   				if (!escreve_arq(tam, matrizC)) {
   					cout << "Erro ao escrever arquivos" << endl;
   					exit(-1);
-  				}				
-				pthread_exit(NULL);
+  				}					
   			}
 		} else {
 			cout << tam << " não é um valor válido, tente inserir um número que é maior que 2 e potência de base 2" << endl;
